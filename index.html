@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Calculator</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>Student Grade Calculator</h1>
+    <div class="container">
+        <form id="gradeForm">
+            <label for="sub1">Maths</label>
+            <input type="number" id="sub1"  placeholder="Enter Maths Mark e.g 90">
+            
+            <label for="sub2">English</label>
+            <input type="number" id="sub2"  placeholder="Enter English Mark">
+            
+            <label for="sub3">Chemistry</label>
+            <input type="number" id="sub3"  placeholder="Enter Chemistry Mark">
+            
+            <label for="sub4">Physics</label>
+            <input type="number" id="sub4" placeholder="Enter Physics Mark">
+            
+            <button type="button" onclick="calculateGrade()">Calculate</button>
+            <button type="reset" onclick="document.getElementById('result').innerHTML=''">Reset</button>
+            <p><strong>Greeting from Mugisho Munganga</strong></p>
+        </form>
+    </div>
+    
+    <h3 id="result"></h3>
+
+    <script>
+        function calculateGrade() {
+            // Picking User inputs
+            let Math = Number(document.getElementById("sub1").value);
+            let English = Number(document.getElementById("sub2").value);
+            let Chemistry = Number(document.getElementById("sub3").value);
+            let Physics = Number(document.getElementById("sub4").value);
+
+            // Calculating the total marks and the average marks
+            let totalmarks = Math + English + Chemistry + Physics;
+            let averagemark = totalmarks / 4;
+
+            // Determining the grade
+            let grade;
+            if (averagemark >= 80) {
+                grade = "A";
+            } else if (averagemark >= 70) {
+                grade = "B";
+            } else if (averagemark >= 60) {
+                grade = "C";
+            } else if (averagemark >= 50) {
+                grade = "D";
+            } else {
+                grade = "F";
+            }
+
+            // Displaying the results
+            document.getElementById("result").innerHTML = 
+                "Total Marks: " + totalmarks + "<br>" + 
+                "Average: " + averagemark.toFixed(2) + "<br>" + 
+                "Grade: " + grade;
+        } 
+    </script>
+</body>
+</html>

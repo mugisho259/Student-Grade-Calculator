@@ -1,0 +1,107 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    
+    background-color: black; /* Light Slate Gray */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #1e293b;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: white;
+}
+
+/* Card Container */
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Form Layout */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #475569;
+    margin-bottom: -8px;
+}
+
+input {
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    border-color: #6366f1; 
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Buttons */
+button {
+    cursor: pointer;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+button[onclick*="calculateGrade"] {
+    background-color: blue; 
+    color: white;
+    margin-top: 10px;
+}
+
+button[onclick*="calculateGrade"]:hover {
+    background-color: green;
+}
+
+button[type="reset"] {
+    background-color: transparent;
+    color: #64748b;
+    font-size: 0.875rem;
+}
+
+button[type="reset"]:hover {
+    color: #0f172a;
+    text-decoration: underline;
+}
+
+/* Result Area */
+#result {
+    margin-top: 25px;
+    text-align: center;
+    line-height: 1.6;
+    color: #334155;
+    font-weight: 500;
+}
+/*Paragragh*/
+p{
+    text-align: center;
+    color: blue;
+}
