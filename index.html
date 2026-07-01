@@ -10,16 +10,16 @@
     <div class="container">
         <form id="gradeForm">
             <label for="sub1">Maths</label>
-            <input type="number" id="sub1"  placeholder="Enter Maths Mark e.g 90">
+            <input type="number" id="sub1" min="0" max="100" required placeholder="Enter Maths Mark e.g 90">
             
             <label for="sub2">English</label>
-            <input type="number" id="sub2"  placeholder="Enter English Mark">
+            <input type="number" id="sub2" min="0" max="100" required placeholder="Enter English Mark">
             
             <label for="sub3">Chemistry</label>
-            <input type="number" id="sub3"  placeholder="Enter Chemistry Mark">
+            <input type="number" id="sub3" min="0" max="100" required placeholder="Enter Chemistry Mark">
             
             <label for="sub4">Physics</label>
-            <input type="number" id="sub4" placeholder="Enter Physics Mark">
+            <input type="number" id="sub4" min="0" max="100" required placeholder="Enter Physics Mark">
             
             <button type="button" onclick="calculateGrade()">Calculate</button>
             <button type="reset" onclick="document.getElementById('result').innerHTML=''">Reset</button>
@@ -30,19 +30,57 @@
     <h3 id="result"></h3>
 
     <script>
+        function parseAndValidateMark(inputId, subjectName) {
+            var raw = document.getElementById(inputId).value.trim();
+            if (raw === "") {
+                return { error: subjectName + " mark is required." };
+            }
+            var mark = Number(raw);
+            if (isNaN(mark)) {
+                return { error: subjectName + " mark must be a valid number." };
+            }
+            if (mark < 0 || mark > 100) {
+                return { error: subjectName + " mark must be between 0 and 100." };
+            }
+            return { value: mark };
+        }
+
         function calculateGrade() {
-            // Picking User inputs
-            let Math = Number(document.getElementById("sub1").value);
-            let English = Number(document.getElementById("sub2").value);
-            let Chemistry = Number(document.getElementById("sub3").value);
-            let Physics = Number(document.getElementById("sub4").value);
+            var resultEl = document.getElementById("result");
+            var subjects = [
+                { id: "sub1", name: "Maths" },
+                { id: "sub2", name: "English" },
+                { id: "sub3", name: "Chemistry" },
+                { id: "sub4", name: "Physics" }
+            ];
+
+            var errors = [];
+            var marks = [];
+
+            for (var i = 0; i < subjects.length; i++) {
+                var parsed = parseAndValidateMark(subjects[i].id, subjects[i].name);
+                if (parsed.error) {
+                    errors.push(parsed.error);
+                } else {
+                    marks.push(parsed.value);
+                }
+            }
+
+            if (errors.length > 0) {
+                resultEl.style.color = "#dc2626";
+                resultEl.innerHTML = errors.join("<br>");
+                return;
+            }
 
             // Calculating the total marks and the average marks
-            let totalmarks = Math + English + Chemistry + Physics;
-            let averagemark = totalmarks / 4;
+            var totalmarks = 0;
+            for (var i = 0; i < marks.length; i++) {
+                totalmarks += marks[i];
+            }
+            var averagemark = totalmarks / marks.length;
 
             // Determining the grade
-            let grade;
+            var grade;
             if (averagemark >= 80) {
                 grade = "A";
             } else if (averagemark >= 70) {
@@ -56,7 +94,8 @@
             }
 
             // Displaying the results
-            document.getElementById("result").innerHTML = 
+            resultEl.style.color = "#334155";
+            resultEl.innerHTML = 
                 "Total Marks: " + totalmarks + "<br>" + 
                 "Average: " + averagemark.toFixed(2) + "<br>" + 
                 "Grade: " + grade;
