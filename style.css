@@ -100,6 +100,13 @@ button[type="reset"]:hover {
     color: #334155;
     font-weight: 500;
 }
+/* Form action buttons wrapper */
+.form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 /*Paragragh*/
 p{
     text-align: center;
